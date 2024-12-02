@@ -3,8 +3,6 @@ import { hightlightsSlides } from "../constants";
 import gsap from "gsap";
 import { pauseImg, playImg, replayImg } from "../utils";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
-gsap.registerPlugin(ScrollTrigger);
 
 const VideoCarousel = () => {
   const videoRef = useRef([]);
@@ -16,7 +14,7 @@ const VideoCarousel = () => {
     startPlay: false,
     videoId: 0,
     isLastVideo: false,
-    isPlaying: false,
+    isPlaying: false
   });
   const [loadedData, setLoadedData] = useState([]);
 
@@ -26,16 +24,16 @@ const VideoCarousel = () => {
     gsap.to("#slider", {
       transform: `translateX(${-100 * videoId}%)`,
       duration: 2,
-      ease: "power2.inOut",
+      ease: "power2.inOut"
     });
     gsap.to("#video", {
       scrollTrigger: {
         trigger: "#video",
-        toggleActions: "restart none none none",
+        toggleActions: "restart none none none"
       },
       onComplete: () => {
         setVideo((pre) => ({ ...pre, startPlay: true, isPlaying: true }));
-      },
+      }
     });
   }, [isEnd, videoId]);
   useEffect(() => {
@@ -66,25 +64,25 @@ const VideoCarousel = () => {
                   ? "10vw"
                   : window.innerWidth < 1200
                   ? "10vw"
-                  : "4vw",
+                  : "4vw"
             });
 
             gsap.to(span[videoId], {
               width: `${currentProgress}%`,
-              backgroundColor: "white",
+              backgroundColor: "white"
             });
           }
         },
         onComplete: () => {
           if (isPlaying) {
             gsap.to(videoDivRef.current[videoId], {
-              width: "12px",
+              width: "12px"
             });
             gsap.to(span[videoId], {
-              backgroundColor: "#afafaf",
+              backgroundColor: "#afafaf"
             });
           }
-        },
+        }
       });
 
       if (videoId == 0) {
@@ -152,7 +150,7 @@ const VideoCarousel = () => {
                   onPlay={() => {
                     setVideo((prevVideo) => ({
                       ...prevVideo,
-                      isPlaying: true,
+                      isPlaying: true
                     }));
                   }}
                   onLoadedMetadata={(e) => handleLoadedMetaData(i, e)}
